@@ -2,6 +2,7 @@ import { Api } from "../api";
 import express, { Express } from "express";
 import { Route } from "./routes/route";
 import mongoose from "mongoose";
+import { loginRequired } from "./middlewares/loginRequired";
 
 export class ApiExpress implements Api {
 	private app: Express;
@@ -32,8 +33,14 @@ export class ApiExpress implements Api {
         routes.forEach((route) => {
             const path = route.getPath();
             const method = route.getMethod();
-            const handler = route.getHandler()
-            this.app[method](path, handler)
+			const handler = route.getHandler()
+
+            if(method === 'get') {
+				this.app[method](path, loginRequired, handler)
+			} else if (method === 'post') {
+				this.app[method](path, handler)
+			}
+           
         })
     }
 

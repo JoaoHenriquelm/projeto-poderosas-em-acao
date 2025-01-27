@@ -8,7 +8,7 @@ import { HttpMethod, Route } from "../route";
 export type CreateAssociateResponseHandler = {
     message: string
 } | {
-    
+    id: string
 }
 
 export type CreateAssociateRequestHandler = CreateAssociateRequest;

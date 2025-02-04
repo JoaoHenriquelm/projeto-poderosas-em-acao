@@ -59,6 +59,7 @@ export const AttendSchema = new mongoose.Schema<IAttend>({
 	vaccines: { type: String, required: true },
 	allergies: { type: String, required: true },
 	specialsConditions: { type: String, required: true },
+	continuousUseMedications: {type: String, required: true},
 	observations: { type: String, required: true },
 	medicalInsurance: { type: String, required: true },
 	working: { type: String, required: true },

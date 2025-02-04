@@ -33,6 +33,7 @@ export interface CreateAttendRequest {
 	vaccines: string;
 	allergies: string;
 	specialsConditions: string;
+	continuousUseMedications: string;
 	observations: string;
 	medicalInsurance: string;
 	working: string;
@@ -92,6 +93,7 @@ export class CreateAttend implements CreateAttendProtocol {
 			request.functionWork,
 			request.activityOfInterest,
 			request.preferredParticipationShift,
+			request.continuousUseMedications,
 			request.emergencyContact,
 			request.dataOfResponsible
 		);

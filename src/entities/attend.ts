@@ -50,6 +50,7 @@ export interface AttendProtocol {
 	get vaccines(): string;
 	get allergies(): string;
 	get specialsConditions(): string;
+	get continuousUseMedications(): string
 	get observations(): string;
 	get medicalInsurance(): string;
 	get working(): string;
@@ -96,6 +97,7 @@ export interface AttendProps {
 	vaccines: string;
 	allergies: string;
 	specialsConditions: string;
+	continuousUseMedications: string
 	observations: string;
 	medicalInsurance: string;
 	working: string;
@@ -148,6 +150,7 @@ export class Attend implements AttendProtocol {
 		vaccines: string,
 		allergies: string,
 		specialsConditions: string,
+		continuousUseMedications: string,
 		observations: string,
 		medicalInsurance: string,
 		working: string,
@@ -201,6 +204,7 @@ export class Attend implements AttendProtocol {
 				preferredParticipationShift,
 				relationOfDependents: relationOfDependents || "Não se aplica",
 				specialsConditions,
+				continuousUseMedications,
 				typeSurgery: typeSurgery || "Não se aplica",
 				vaccines,
 				working,
@@ -314,6 +318,9 @@ export class Attend implements AttendProtocol {
 	}
 	get specialsConditions(): string {
 		return this.props.specialsConditions;
+	}
+	get continuousUseMedications(): string {
+		return this.props.continuousUseMedications
 	}
 	get typeSurgery(): string {
 		return this.props.typeSurgery;

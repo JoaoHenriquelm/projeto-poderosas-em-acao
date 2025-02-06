@@ -6,6 +6,7 @@ import { AttendRepository } from "../repositories/attend-repository";
 export interface CreateAttendRequest {
 	fullName: string;
 	dateOfBirth: string;
+	ageSigned: string
 	natiolity: string;
 	maritalStatus: string;
 	cpf: string;
@@ -61,6 +62,7 @@ export class CreateAttend implements CreateAttendProtocol {
 		const attend = Attend.associateCategory(
 			request.fullName,
 			request.dateOfBirth,
+			request.ageSigned,
 			request.natiolity,
 			request.maritalStatus,
 			request.cpf,

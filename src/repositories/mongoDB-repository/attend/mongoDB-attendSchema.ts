@@ -32,6 +32,7 @@ export const AttendSchema = new mongoose.Schema<IAttend>({
 	_id: mongoose.Types.UUID,
 	fullName: { type: String, required: true },
 	dateOfBirth: { type: String, required: true },
+	ageSigned: {type: String, required: true},
 	natiolity: { type: String, required: true },
 	maritalStatus: { type: String, required: true },
 	cpf: { type: String, required: true, unique: true },

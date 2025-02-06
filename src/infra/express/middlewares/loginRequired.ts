@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from "express"
 import jwt from "jsonwebtoken"
 
-type JwtPayload = {
+export type JwtPayload = {
     name: string
     id: string
 }

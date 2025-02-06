@@ -9,6 +9,7 @@ export class mongoDBAttend implements AttendRepository {
 		await this.attendModel.create({
 			_id: attend.id,
 			fullName: attend.fullName,
+			ageSigned: attend.ageSigned,
 			activityOfInterest: attend.activityOfInterest,
 			address: attend.address,
 			allergies: attend.allergies,
@@ -99,6 +100,7 @@ export class mongoDBAttend implements AttendRepository {
             email: search.email,
             emergencyContact: search.emergencyContact,
             fullName: search.fullName,
+			ageSigned: search.ageSigned,
             functionWork: search.functionWork,
             hadSurgery: search.hadSurgery,
             homePhone: search.homePhone,

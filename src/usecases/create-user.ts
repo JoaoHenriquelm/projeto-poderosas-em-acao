@@ -1,3 +1,4 @@
+
 import { User } from "../entities/user";
 import { Either, failure, success } from "../errors/either";
 import { UserRepository } from "../repositories/user-repository";
@@ -23,7 +24,7 @@ export class CreateUser implements CreateUserProtocol {
 		const user = User.createUser(request.name, hashPassword);
 
 		if (user.isRight()) {
-			this.repository.store(user.value);
+			await this.repository.store(user.value);
 			return success({ id: user.value.id });
 		} else {
 			return failure(user.reason);

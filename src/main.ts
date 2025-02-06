@@ -20,6 +20,8 @@ import { ShowAssociatesPerBirthdayMonth } from "./usecases/show-associates-per-b
 import { ShowAttend } from "./usecases/show-attend";
 import dotenv from "dotenv"
 import { resolve } from "path";
+import { VerifyToken } from "./usecases/verify-token";
+import { VerifyTokenRoute } from "./infra/express/routes/login/verify-user-express-route";
 
 function main() {
     dotenv.config({path: resolve(__dirname, '../.env')})
@@ -36,6 +38,7 @@ function main() {
     const showAttendUseCase = new ShowAttend(attendRepository)
     const createAttendUseCase = new CreateAttend(attendRepository)
     const loginUserUseCase = new LoginUser(userRepository)
+    const verifyTokenUseCase = new VerifyToken(userRepository)
     
     const createAssociateRoute = CreateAssociateRoute.create(createAssociateUseCase)
     const showAssociatesRoute = ShowAssociatesRoute.show(showAssociatesUseCase)
@@ -45,8 +48,9 @@ function main() {
     const showAttendRoute = ShowAttendRoute.show(showAttendUseCase)
     const createAttendRoute = CreateAttendRoute.create(createAttendUseCase)
     const loginUserRoute = LoginUserRoute.create(loginUserUseCase)
+    const verifyTokenRoute = VerifyTokenRoute.create(verifyTokenUseCase)
 
-    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, loginUserRoute])
+    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, loginUserRoute, verifyTokenRoute])
     api.start(Number(process.env.PORT))
 }
 main()

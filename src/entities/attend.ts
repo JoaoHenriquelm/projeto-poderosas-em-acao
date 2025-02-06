@@ -23,6 +23,7 @@ export interface ResponsibleData {
 export interface AttendProtocol {
 	get fullName(): string;
 	get dateOfBirth(): string;
+	get ageSigned(): string
 	get natiolity(): string;
 	get maritalStatus(): string;
 	get cpf(): string;
@@ -70,6 +71,7 @@ export interface AttendProps {
 	_id: string;
 	fullName: string;
 	dateOfBirth: string;
+	ageSigned: string
 	natiolity: string;
 	maritalStatus: string;
 	cpf: string;
@@ -123,6 +125,7 @@ export class Attend implements AttendProtocol {
 	static associateCategory(
 		fullName: string,
 		dateOfBirth: string,
+		ageSigned: string,
 		natiolity: string,
 		maritalStatus: string,
 		cpf: string,
@@ -178,6 +181,7 @@ export class Attend implements AttendProtocol {
 				city,
 				cpf,
 				dateOfBirth,
+				ageSigned,
 				email,
 				homePhone,
 				maritalStatus,
@@ -237,6 +241,9 @@ export class Attend implements AttendProtocol {
 	}
 	get dateOfBirth(): string {
 		return this.props.dateOfBirth;
+	}
+	get ageSigned(): string {
+		return this.props.ageSigned
 	}
 	get email(): string {
 		return this.props.email;

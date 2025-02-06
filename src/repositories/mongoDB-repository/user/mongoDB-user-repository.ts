@@ -4,10 +4,7 @@ import { IUser, UserSchema } from "./mongoDB-userSchema";
 import { User } from "../../../entities/user";
 
 export class MongoDBUser implements UserRepository {
-	private userModel = mongoose.model<IUser>(
-		"User",
-		UserSchema
-	);
+	private userModel = mongoose.model<IUser>("User", UserSchema);
 	async store(user: User): Promise<void> {
 		await this.userModel.create({
 			_id: user.id,
@@ -16,9 +13,7 @@ export class MongoDBUser implements UserRepository {
 		});
 	}
 
-	async findUserPerName(
-		name: string
-	): Promise<User | null> {
+	async findUserPerName(name: string): Promise<User | null> {
 		const search = await this.userModel.findOne({
 			name
 		});
@@ -31,8 +26,6 @@ export class MongoDBUser implements UserRepository {
 			hashPassword: search.hashPassword,
 			name: search.name
 		});
-		return user
+		return user;
 	}
-
-
 }

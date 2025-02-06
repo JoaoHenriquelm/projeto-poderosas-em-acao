@@ -34,6 +34,7 @@ export class CreateAttendRoute implements Route {
         return async (request: Request, response: Response) => {
             const {
                 activityOfInterest,
+                ageSigned,
                 address,
                 allergies,
                 amountOfQuimi,
@@ -75,6 +76,7 @@ export class CreateAttendRoute implements Route {
             const input: CreateAttendRequestHandler = {
                 fullName,
                 dateOfBirth,
+                ageSigned,
                 cpf,
                 address,
                 activityOfInterest,

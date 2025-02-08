@@ -33,7 +33,7 @@ export class LoginUser implements LoginUserProtocol {
 		}
 
 		const token = jwt.sign({ name: user.name, id: user.id }, process.env.JWT_PASS || "", {
-			expiresIn: 60
+			expiresIn: '30d'
 		});
 
         return success({token})

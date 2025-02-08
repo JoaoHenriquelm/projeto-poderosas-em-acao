@@ -12,4 +12,7 @@ export interface AssociateRepository {
 		limit: number,
 		page: number
 	): Promise<Array<Associate>>;
+	getNumberOfPages(
+		limit: number,
+	): Promise<number>
 }

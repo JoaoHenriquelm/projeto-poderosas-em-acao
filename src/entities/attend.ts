@@ -62,6 +62,7 @@ export interface AttendProtocol {
 	get emergencyContact(): EmergencyContact;
 	get dataOfResponsible(): ResponsibleData | undefined;
 
+	get authorizationUseImage(): string
 	get id(): string;
 	get monthBirthday(): string;
 	get dayBirthday(): number;
@@ -109,6 +110,7 @@ export interface AttendProps {
 
 	emergencyContact: EmergencyContact;
 	dataOfResponsible?: ResponsibleData;
+	authorizationUseImage: string
 	monthBirthday: string;
 	dayBirthday: number;
 }
@@ -160,9 +162,9 @@ export class Attend implements AttendProtocol {
 		functionWork: string,
 		activityOfInterest: string,
 		preferredParticipationShift: string,
-
+		authorizationUseImage: string,
 		emergencyContact: EmergencyContact,
-		dataOfResponsible?: ResponsibleData
+		dataOfResponsible?: ResponsibleData,
 	): CreateAttend {
 		const validatorAdapter = new ValidatorAdapter();
 		if (!validatorAdapter.isCPF(cpf)) {
@@ -212,12 +214,16 @@ export class Attend implements AttendProtocol {
 				typeSurgery: typeSurgery || "Não se aplica",
 				vaccines,
 				working,
+				authorizationUseImage,
 				monthBirthday: dateOfBirth.slice(5, 7),
-				dayBirthday: Number(dateOfBirth.slice(8, 10))
+				dayBirthday: Number(dateOfBirth.slice(8, 10)),
 			})
 		);
 	}
 
+	get authorizationUseImage(): string {
+		return this.props.authorizationUseImage
+	}
     get monthBirthday(): string {
         return this.props.monthBirthday
     }

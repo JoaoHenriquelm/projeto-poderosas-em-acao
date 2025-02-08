@@ -46,6 +46,7 @@ export class mongoDBAttend implements AttendRepository {
 			typeSurgery: attend.typeSurgery,
 			vaccines: attend.vaccines,
 			working: attend.working,
+			authorizationUseImage: attend.authorizationUseImage,
 			emergencyContact: {
 				name: attend.emergencyContact.name,
 				kinship: attend.emergencyContact.kinship,
@@ -121,7 +122,8 @@ export class mongoDBAttend implements AttendRepository {
             street: search.street,
             typeSurgery: search.typeSurgery,
             vaccines: search.vaccines,
-            working: search.working
+            working: search.working,
+			authorizationUseImage: search.authorizationUseImage
         })
         return attend
     }

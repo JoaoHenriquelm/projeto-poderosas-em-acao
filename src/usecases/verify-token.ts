@@ -25,18 +25,25 @@ export class VerifyToken implements VerifyTokenProtocol {
 				message: "Nenhum token foi enviado."
 			});
 
-		const { name } = jwt.verify(
-			request.token,
-			process.env.JWT_PASS || ""
-		) as JwtPayload;
-		const user = await this.repository.findUserPerName(name);
-		if (user === null) {
+		try {
+			const { name } = jwt.verify(
+				request.token,
+				process.env.JWT_PASS || ""
+			) as JwtPayload;
+			const user = await this.repository.findUserPerName(name);
+			if (user === null) {
+				return failure({
+					isValid: false,
+					message: "Usuário com esse token não existe"
+				});
+			}
+
+			return success({ isValid: true });
+		} catch (e) {
 			return failure({
 				isValid: false,
-				message: "Usuário com esse token não existe"
+				message: e.message
 			});
 		}
-
-		return success({ isValid: true });
 	}
 }

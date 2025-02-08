@@ -22,6 +22,8 @@ import dotenv from "dotenv"
 import { resolve } from "path";
 import { VerifyToken } from "./usecases/verify-token";
 import { VerifyTokenRoute } from "./infra/express/routes/login/verify-user-express-route";
+import { GetLimitOfPagesOfAssociates } from "./usecases/get-limit-of-pages-of-assosicates";
+import { GetLimitOfPagesOfAssociatesRoute } from "./infra/express/routes/pages/get-limit-of-pages-of-associates-express-route";
 
 function main() {
     dotenv.config({path: resolve(__dirname, '../.env')})
@@ -35,22 +37,25 @@ function main() {
     const showAssociateUseCase = new ShowAssociate(associateRepository)
     const showAssociatesPerBirthdayMonthUseCase = new ShowAssociatesPerBirthdayMonth(associateRepository)
     const indexAssociatesUseCase = new IndexAssociates(associateRepository)
+    const getLimitOfPagesOfAssociatesUseCase = new GetLimitOfPagesOfAssociates(associateRepository)
     const showAttendUseCase = new ShowAttend(attendRepository)
     const createAttendUseCase = new CreateAttend(attendRepository)
     const loginUserUseCase = new LoginUser(userRepository)
     const verifyTokenUseCase = new VerifyToken(userRepository)
+
     
     const createAssociateRoute = CreateAssociateRoute.create(createAssociateUseCase)
     const showAssociatesRoute = ShowAssociatesRoute.show(showAssociatesUseCase)
     const showAssociateRoute = ShowAssociateRoute.show(showAssociateUseCase)
     const showAssociatesPerBirthdayMonthRoute = ShowAssociatesPerBirthdayMonthRoute.show(showAssociatesPerBirthdayMonthUseCase)
     const indexAssociatesRoute = IndexAssociatesRoute.index(indexAssociatesUseCase)
+    const getLimitOfPagesOfAssociatesRoute = GetLimitOfPagesOfAssociatesRoute.index(getLimitOfPagesOfAssociatesUseCase)
     const showAttendRoute = ShowAttendRoute.show(showAttendUseCase)
     const createAttendRoute = CreateAttendRoute.create(createAttendUseCase)
     const loginUserRoute = LoginUserRoute.create(loginUserUseCase)
     const verifyTokenRoute = VerifyTokenRoute.create(verifyTokenUseCase)
 
-    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, loginUserRoute, verifyTokenRoute])
+    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, loginUserRoute, verifyTokenRoute, getLimitOfPagesOfAssociatesRoute])
     api.start(Number(process.env.PORT))
 }
 main()

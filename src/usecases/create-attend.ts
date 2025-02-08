@@ -41,6 +41,7 @@ export interface CreateAttendRequest {
 	functionWork: string;
 	activityOfInterest: string;
 	preferredParticipationShift: string;
+	authorizationUseImage: string
 
 	emergencyContact: EmergencyContact;
 	dataOfResponsible?: ResponsibleData;
@@ -96,6 +97,7 @@ export class CreateAttend implements CreateAttendProtocol {
 			request.activityOfInterest,
 			request.preferredParticipationShift,
 			request.continuousUseMedications,
+			request.authorizationUseImage,
 			request.emergencyContact,
 			request.dataOfResponsible
 		);

@@ -72,7 +72,7 @@ export const AttendSchema = new mongoose.Schema<IAttend>({
 		required: true
 	},
 	dataOfResponsible: { type: dataOfResponsible, required: false },
-
+	authorizationUseImage: {type: String, required: true},
 	monthBirthday: { type: String, required: true },
 	dayBirthday: { type: Number, required: true }
 });

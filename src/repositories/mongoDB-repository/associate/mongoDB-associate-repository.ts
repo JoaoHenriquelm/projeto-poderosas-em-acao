@@ -31,8 +31,8 @@ export class mongoDBAssociate implements AssociateRepository {
 			paymentMethod: associate.paymentMethod,
 			responsibleCPF: associate.responsibleCPF,
 			responsibleName: associate.responsibleName,
-            dayBirthday: associate.dayBirthday,
-            monthBirthday: associate.monthBirthday
+			dayBirthday: associate.dayBirthday,
+			monthBirthday: associate.monthBirthday
 		});
 	}
 
@@ -44,9 +44,7 @@ export class mongoDBAssociate implements AssociateRepository {
 		return true;
 	}
 
-	async findAssociatePerCpf(
-		cpf: string
-	): Promise<Associate | null> {
+	async findAssociatePerCpf(cpf: string): Promise<Associate | null> {
 		const search = await this.associateModel.findOne({
 			cpf
 		});
@@ -76,15 +74,13 @@ export class mongoDBAssociate implements AssociateRepository {
 			rg: search.rg,
 			state: search.state,
 			street: search.street,
-            monthBirthday: search.monthBirthday,
-            dayBirthday: search.dayBirthday
+			monthBirthday: search.monthBirthday,
+			dayBirthday: search.dayBirthday
 		});
-		return associate
+		return associate;
 	}
 
-	async findAssociatesPerName(
-		name: string
-	): Promise<Array<Associate>> {
+	async findAssociatesPerName(name: string): Promise<Array<Associate>> {
 		const nameNormalized = name
 			.normalize("NFD")
 			.replace(/[\u0300-\u036f]/g, "")
@@ -120,53 +116,22 @@ export class mongoDBAssociate implements AssociateRepository {
 				rg: s.rg,
 				state: s.state,
 				street: s.street,
-                monthBirthday: s.monthBirthday,
-                dayBirthday: s.dayBirthday
+				monthBirthday: s.monthBirthday,
+				dayBirthday: s.dayBirthday
 			});
 			return associate;
 		});
 		return associateList;
 	}
 
-    async findAssociatesPerBirthdayMonth(currentMonthString: string): Promise<Array<Associate>> {
-    const search = await this.associateModel.find({monthBirthday: currentMonthString}).sort({dayBirthday: 1});
+	async findAssociatesPerBirthdayMonth(
+		currentMonthString: string
+	): Promise<Array<Associate>> {
+		const search = await this.associateModel
+			.find({ monthBirthday: currentMonthString })
+			.sort({ dayBirthday: 1 });
 
-    const associateList = search.map((s) => {
-        const associate = Associate.with({
-            _id: s.id,
-            address: s.address,
-            associationCategory: s.associationCategory,
-            cellPhone: s.cellPhone,
-            cep: s.cep,
-            city: s.city,
-            contribuitionAmount: s.contribuitionAmount,
-            cpf: s.cpf,
-            dateOfBirth: s.dateOfBirth,
-            email: s.email,
-            fullName: s.fullName,
-            homePhone: s.homePhone,
-            issuingBody: s.issuingBody,
-            maritalStatus: s.maritalStatus,
-            natiolity: s.natiolity,
-            paymentMethod: s.paymentMethod,
-            responsibleCPF: s.responsibleCPF,
-            responsibleName: s.responsibleName,
-            rg: s.rg,
-            state: s.state,
-            street: s.street,
-            monthBirthday: s.monthBirthday,
-            dayBirthday: s.dayBirthday
-        });
-        return associate;
-    });
-    return associateList;
-    }
-
-    async findAssociatesPerLimit(limit: number, page: number): Promise<Array<Associate>> {
-		const skip = (page - 1) * limit
-        const search = await this.associateModel.find().skip(skip).limit(limit)
-
-        const associateList = search.map((s) => {
+		const associateList = search.map((s) => {
 			const associate = Associate.with({
 				_id: s.id,
 				address: s.address,
@@ -189,11 +154,54 @@ export class mongoDBAssociate implements AssociateRepository {
 				rg: s.rg,
 				state: s.state,
 				street: s.street,
-                monthBirthday: s.monthBirthday,
-                dayBirthday: s.dayBirthday
+				monthBirthday: s.monthBirthday,
+				dayBirthday: s.dayBirthday
 			});
 			return associate;
 		});
 		return associateList;
-    }
+	}
+
+	async findAssociatesPerLimit(
+		limit: number,
+		page: number
+	): Promise<Array<Associate>> {
+		const skip = (page - 1) * limit;
+		const search = await this.associateModel.find().skip(skip).limit(limit);
+
+		const associateList = search.map((s) => {
+			const associate = Associate.with({
+				_id: s.id,
+				address: s.address,
+				associationCategory: s.associationCategory,
+				cellPhone: s.cellPhone,
+				cep: s.cep,
+				city: s.city,
+				contribuitionAmount: s.contribuitionAmount,
+				cpf: s.cpf,
+				dateOfBirth: s.dateOfBirth,
+				email: s.email,
+				fullName: s.fullName,
+				homePhone: s.homePhone,
+				issuingBody: s.issuingBody,
+				maritalStatus: s.maritalStatus,
+				natiolity: s.natiolity,
+				paymentMethod: s.paymentMethod,
+				responsibleCPF: s.responsibleCPF,
+				responsibleName: s.responsibleName,
+				rg: s.rg,
+				state: s.state,
+				street: s.street,
+				monthBirthday: s.monthBirthday,
+				dayBirthday: s.dayBirthday
+			});
+			return associate;
+		});
+		return associateList;
+	}
+	async getNumberOfPages(limit: number): Promise<number> {
+		const totalDocuments = await this.associateModel.countDocuments();
+		const totalPages = Math.ceil(totalDocuments / limit);
+		return totalPages;
+	}
 }

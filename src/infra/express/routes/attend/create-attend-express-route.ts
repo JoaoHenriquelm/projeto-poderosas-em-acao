@@ -70,7 +70,8 @@ export class CreateAttendRoute implements Route {
                 typeSurgery,
                 vaccines,
                 working,
-                dataOfResponsible
+                dataOfResponsible,
+                authorizationUseImage
             }: CreateAttendRequestHandler = request.body;
 
             const input: CreateAttendRequestHandler = {
@@ -111,7 +112,8 @@ export class CreateAttendRoute implements Route {
                 typeSurgery,
                 vaccines,
                 working,
-                dataOfResponsible
+                dataOfResponsible,
+                authorizationUseImage
             };
 
             const output = await this.createAttendService.execute(input)

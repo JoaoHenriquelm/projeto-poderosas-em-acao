@@ -15,12 +15,18 @@ export const loginRequired = async (req: Request, res: Response, next: NextFunct
         return
     }
     const token = authorization.split(' ')[1]
-    const { name, id } = jwt.verify(token, process.env.JWT_PASS || '') as JwtPayload
-
-    const user: JwtPayload = {
-        name,
-        id
+    try{
+        const { name, id } = jwt.verify(token, process.env.JWT_PASS || '') as JwtPayload
+        const user: JwtPayload = {
+            name,
+            id
+        }
+        req.body.user = user
+        return next()
+    } catch(e) {
+        res.status(401).json({
+            message: e.message,
+        })
+        return
     }
-    req.body.user = user
-    return next()
 }

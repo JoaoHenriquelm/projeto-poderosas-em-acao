@@ -67,12 +67,12 @@ export const AttendSchema = new mongoose.Schema<IAttend>({
 	functionWork: { type: String, required: true },
 	activityOfInterest: { type: String, required: true },
 	preferredParticipationShift: { type: String, required: true },
+	authorizationUseImage: {type: String, required: true},
 	emergencyContact: {
 		type: emergencyContact,
 		required: true
 	},
 	dataOfResponsible: { type: dataOfResponsible, required: false },
-	authorizationUseImage: {type: String, required: true},
 	monthBirthday: { type: String, required: true },
 	dayBirthday: { type: Number, required: true }
 });

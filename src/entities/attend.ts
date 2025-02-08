@@ -62,7 +62,7 @@ export interface AttendProtocol {
 	get emergencyContact(): EmergencyContact;
 	get dataOfResponsible(): ResponsibleData | undefined;
 
-	get authorizationUseImage(): string
+	get authorizationUseImage(): string;
 	get id(): string;
 	get monthBirthday(): string;
 	get dayBirthday(): number;
@@ -221,9 +221,7 @@ export class Attend implements AttendProtocol {
 		);
 	}
 
-	get authorizationUseImage(): string {
-		return this.props.authorizationUseImage
-	}
+
     get monthBirthday(): string {
         return this.props.monthBirthday
     }
@@ -346,5 +344,8 @@ export class Attend implements AttendProtocol {
 	}
 	get id(): string {
 		return this.props._id;
+	}
+	get authorizationUseImage(): string {
+		return this.props.authorizationUseImage
 	}
 }

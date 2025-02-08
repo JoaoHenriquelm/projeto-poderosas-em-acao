@@ -23,7 +23,7 @@ export interface ResponsibleData {
 export interface AttendProtocol {
 	get fullName(): string;
 	get dateOfBirth(): string;
-	get ageSigned(): string
+	get ageSigned(): string;
 	get natiolity(): string;
 	get maritalStatus(): string;
 	get cpf(): string;
@@ -51,7 +51,7 @@ export interface AttendProtocol {
 	get vaccines(): string;
 	get allergies(): string;
 	get specialsConditions(): string;
-	get continuousUseMedications(): string
+	get continuousUseMedications(): string;
 	get observations(): string;
 	get medicalInsurance(): string;
 	get working(): string;
@@ -72,7 +72,7 @@ export interface AttendProps {
 	_id: string;
 	fullName: string;
 	dateOfBirth: string;
-	ageSigned: string
+	ageSigned: string;
 	natiolity: string;
 	maritalStatus: string;
 	cpf: string;
@@ -100,7 +100,7 @@ export interface AttendProps {
 	vaccines: string;
 	allergies: string;
 	specialsConditions: string;
-	continuousUseMedications: string
+	continuousUseMedications: string;
 	observations: string;
 	medicalInsurance: string;
 	working: string;
@@ -110,7 +110,7 @@ export interface AttendProps {
 
 	emergencyContact: EmergencyContact;
 	dataOfResponsible?: ResponsibleData;
-	authorizationUseImage: string
+	authorizationUseImage: string;
 	monthBirthday: string;
 	dayBirthday: number;
 }
@@ -164,7 +164,7 @@ export class Attend implements AttendProtocol {
 		preferredParticipationShift: string,
 		authorizationUseImage: string,
 		emergencyContact: EmergencyContact,
-		dataOfResponsible?: ResponsibleData,
+		dataOfResponsible?: ResponsibleData
 	): CreateAttend {
 		const validatorAdapter = new ValidatorAdapter();
 		if (!validatorAdapter.isCPF(cpf)) {
@@ -177,57 +177,56 @@ export class Attend implements AttendProtocol {
 					.normalize("NFD")
 					.replace(/[\u0300-\u036f]/g, "")
 					.toUpperCase(),
-				address,
-				cellPhone,
-				cep,
-				city,
-				cpf,
-				dateOfBirth,
-				ageSigned,
-				email,
-				homePhone,
-				maritalStatus,
-				natiolity,
-				rg,
-				state,
-				street,
-				activityOfInterest,
-				allergies,
-				amountOfQuimi,
-				amountOfRad,
+				address: address,
+				cellPhone:cellPhone,
+				cep: cep,
+				city: city,
+				cpf: cpf,
+				dateOfBirth:dateOfBirth,
+				ageSigned:ageSigned,
+				email: email,
+				homePhone: homePhone,
+				maritalStatus: maritalStatus,
+				natiolity: natiolity,
+				rg: rg,
+				state: state,
+				street: street,
+				activityOfInterest: activityOfInterest,
+				allergies: allergies,
+				amountOfQuimi: amountOfQuimi,
+				amountOfRad: amountOfRad,
 				currentSchool: currentSchool || "Não se aplica",
-				dataOfResponsible,
+				dataOfResponsible: dataOfResponsible,
 				dependents: dependents || "Não se aplica",
-				diagnosisYear,
-				emergencyContact,
+				diagnosisYear: diagnosisYear,
+				emergencyContact: emergencyContact,
 				functionWork: functionWork || "Não se aplica",
-				hadSurgery,
-				mastologis,
+				hadSurgery: hadSurgery,
+				mastologis: mastologis,
 				medicalInsurance: medicalInsurance || "Não se aplica",
 				numberOfDependents: numberOfDependents || "Não se aplica",
-				observations,
-				oncologist,
-				preferredParticipationShift,
+				observations: observations,
+				oncologist: oncologist,
+				preferredParticipationShift: preferredParticipationShift,
 				relationOfDependents: relationOfDependents || "Não se aplica",
-				specialsConditions,
-				continuousUseMedications,
+				specialsConditions: specialsConditions,
+				continuousUseMedications: continuousUseMedications,
 				typeSurgery: typeSurgery || "Não se aplica",
-				vaccines,
-				working,
-				authorizationUseImage,
+				vaccines: vaccines,
+				working: working,
+				authorizationUseImage: authorizationUseImage,
 				monthBirthday: dateOfBirth.slice(5, 7),
-				dayBirthday: Number(dateOfBirth.slice(8, 10)),
+				dayBirthday: Number(dateOfBirth.slice(8, 10))
 			})
 		);
 	}
 
-
-    get monthBirthday(): string {
-        return this.props.monthBirthday
-    }
+	get monthBirthday(): string {
+		return this.props.monthBirthday;
+	}
 	get dayBirthday(): number {
-        return this.props.dayBirthday
-    }
+		return this.props.dayBirthday;
+	}
 	get address(): string {
 		return this.props.address;
 	}
@@ -247,7 +246,7 @@ export class Attend implements AttendProtocol {
 		return this.props.dateOfBirth;
 	}
 	get ageSigned(): string {
-		return this.props.ageSigned
+		return this.props.ageSigned;
 	}
 	get email(): string {
 		return this.props.email;
@@ -331,7 +330,7 @@ export class Attend implements AttendProtocol {
 		return this.props.specialsConditions;
 	}
 	get continuousUseMedications(): string {
-		return this.props.continuousUseMedications
+		return this.props.continuousUseMedications;
 	}
 	get typeSurgery(): string {
 		return this.props.typeSurgery;
@@ -346,6 +345,6 @@ export class Attend implements AttendProtocol {
 		return this.props._id;
 	}
 	get authorizationUseImage(): string {
-		return this.props.authorizationUseImage
+		return this.props.authorizationUseImage;
 	}
 }

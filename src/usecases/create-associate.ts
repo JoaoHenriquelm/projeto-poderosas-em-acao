@@ -42,7 +42,6 @@ export class CreateAssociate implements CreateAssociateProtocol {
 			return failure({ message: "Esse associado já tem seu cpf cadastrado." });
 
 		const associate = Associate.createAssociate(request.fullName, request.dateOfBirth, request.natiolity, request.maritalStatus, request.cpf, request.rg, request.issuingBody, request.address, request.street, request.city, request.cep, request.state, request.homePhone, request.cellPhone, request.email, request.associationCategory, request.contribuitionAmount, request.paymentMethod, request.responsibleCPF, request.responsibleName);
-
 		if (associate.isRight()) {
 			this.repository.store(associate.value);
 			return success({id: associate.value.id});

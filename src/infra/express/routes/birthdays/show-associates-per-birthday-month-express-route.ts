@@ -3,8 +3,11 @@ import { HttpMethod, Route } from "../route";
 import { Associate } from "../../../../entities/associate";
 import {
 	ShowAssociatesPerBirthdayMonth,
-	ShowAssociatesPerBirthdayMonthResponse
+	ShowAssociatesPerBirthdayMonthResponse,
+	ShowAssociatesPerBithdayMonthRequest
 } from "../../../../usecases/show-associates-per-birthdaymonth";
+
+export type ShowAssociatesPerBirthdayMonthRequestHandler = ShowAssociatesPerBithdayMonthRequest;
 
 type ShowAssociatesPerBirthDayOutput = {
 	props: {
@@ -36,7 +39,7 @@ export class ShowAssociatesPerBirthdayMonthRoute implements Route {
 		showAssociatesPerBirthdayMonthService: ShowAssociatesPerBirthdayMonth
 	) {
 		return new ShowAssociatesPerBirthdayMonthRoute(
-			"/birthdays/",
+			"/birthdays/:month",
 			HttpMethod.GET,
 			showAssociatesPerBirthdayMonthService
 		);
@@ -50,7 +53,13 @@ export class ShowAssociatesPerBirthdayMonthRoute implements Route {
 
 	getHandler(): (request: Request, response: Response) => Promise<void> {
 		return async (request: Request, response: Response) => {
-			const output = await this.showAssociatesPerBirthdayMonthService.execute();
+			const { month } = request.params;
+
+			const input: ShowAssociatesPerBirthdayMonthRequestHandler = {
+				month
+			}
+
+			const output = await this.showAssociatesPerBirthdayMonthService.execute(input);
 
 			const responseBody = this.present(output);
 

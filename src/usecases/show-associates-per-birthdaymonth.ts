@@ -2,13 +2,17 @@ import { Associate } from "../entities/associate";
 import { Either, failure, success } from "../errors/either";
 import { AssociateRepository } from "../repositories/associate-repository";
 
+export type ShowAssociatesPerBithdayMonthRequest = {
+	month: string;
+}
+
 export type ShowAssociatesPerBirthdayMonthResponse = Either<
 	{ value: Array<Associate>; message: string },
 	Array<Associate>
 >;
 
 export interface ShowAssociatesPerBirthdayMonthProtocol {
-	execute(): Promise<ShowAssociatesPerBirthdayMonthResponse>;
+	execute(request: ShowAssociatesPerBithdayMonthRequest): Promise<ShowAssociatesPerBirthdayMonthResponse>;
 }
 
 export class ShowAssociatesPerBirthdayMonth
@@ -16,14 +20,13 @@ export class ShowAssociatesPerBirthdayMonth
 {
 	constructor(private repository: AssociateRepository) {}
 
-	async execute(): Promise<ShowAssociatesPerBirthdayMonthResponse> {
-		const currentMonthNumber = new Date().getMonth() + 1;
-		const currentMonthString =
-			currentMonthNumber < 10
-				? `0${currentMonthNumber}`
-				: `${currentMonthNumber}`;
+	async execute(request: ShowAssociatesPerBithdayMonthRequest): Promise<ShowAssociatesPerBirthdayMonthResponse> {
+		if(Number(request.month) < 1 || Number(request.month) > 12) return failure({
+			value: [],
+			message: "Esse mês não existe"
+		});
 		const searchAssociates =
-			await this.repository.findAssociatesPerBirthdayMonth(currentMonthString);
+			await this.repository.findAssociatesPerBirthdayMonth(request.month);
 
 		if (searchAssociates.length === 0)
 			return failure({

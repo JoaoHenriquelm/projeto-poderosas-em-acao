@@ -1,7 +1,7 @@
 
 # ❤️ Poderosas Em ação - Back-end
 
-Essa aplicação é a parte do lado do servidor do projeto poderosas em ação que faz funções como login de usuários administradores no aplicativo do lado do usuário, pegar informações dos associados, cadastro de associados e assistidos recebido pelo google forms. Essas informações serão cadastradas no banco de dados MongoDB. 
+Esta aplicação corresponde ao lado do servidor do projeto Poderosas em Ação, sendo responsável por funcionalidades essenciais, como autenticação de administradores no aplicativo, recuperação de informações dos associados e cadastro de novos associados e assistidos a partir de dados recebidos via Google Forms. Todas as informações são armazenadas no banco de dados MongoDB.
 
 
 ## 👤 Usado por

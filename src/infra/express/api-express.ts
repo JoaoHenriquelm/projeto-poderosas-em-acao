@@ -20,7 +20,7 @@ export class ApiExpress implements Api {
     
 	private databaseConnection(): void {
         mongoose.connect(
-			`mongodb+srv://kuckkas:${process.env.DATABASE_PASSWORD}@projeto.tqwky.mongodb.net/?retryWrites=true&w=majority&appName=Projeto`
+			`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@projeto.88n1p.mongodb.net/?retryWrites=true&w=majority&appName=Projeto`
 		);
     }
 

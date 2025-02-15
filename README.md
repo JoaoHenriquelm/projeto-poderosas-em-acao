@@ -93,7 +93,7 @@ Esse projeto é usado pela instituição poderosas em ação.
 | `preferredParticipationShift` | `string` | **Obrigatório**. Turno preferido de participação do assistido 
 | `authorizationUseImage` | `string` | **Obrigatório**. O assistido autoriza o uso da imagem? 
 | `emergencyContact` | `{	name: string, phoneNumber: string, kinship: string}` | **Obrigatório**. Contato de emergência do assistido 
-| `dataOfResponsible` | `{	fullName: string, kinship:string, dateOfBirth: string, rg: string, cpf: string, address: string, homePhone: string, cellPhone: string, email: string}` | Dados do responsável do assistido 
+| `dataOfResponsible` | `{	fullName: string, kinship:string, dateOfBirth: string, rg: string, cpf: string, address: string, homePhone: string, cellPhone: string, email: string }` | Dados do responsável do assistido 
 
 #### Retorna um associado
 

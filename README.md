@@ -14,7 +14,7 @@ Esse projeto é usado pela instituição poderosas em ação.
 - [Site da organização](https://www.poderosasemacao.org/)
 ## 🔧 Tecnologias utilizadas
 
-**Back-end:** Node, Typescript, Express, Bcrypt, DotEnv, JsonWebToken, Mongoose, Eslint.
+**Back-end:** Node, Typescript, Express, Bcrypt, JsonWebToken, Mongoose.
 
 **Banco de Dados:** MongoDB.
 ## 📄 Documentação da API

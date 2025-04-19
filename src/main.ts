@@ -24,6 +24,10 @@ import { VerifyToken } from "./usecases/verify-token";
 import { VerifyTokenRoute } from "./infra/express/routes/login/verify-user-express-route";
 import { GetLimitOfPagesOfAssociates } from "./usecases/get-limit-of-pages-of-assosicates";
 import { GetLimitOfPagesOfAssociatesRoute } from "./infra/express/routes/pages/get-limit-of-pages-of-associates-express-route";
+import { IndexContributors } from "./usecases/index-contributors";
+import { IndexContributorsRoute } from "./infra/express/routes/contributors/index-contributors-express-route";
+import { GetLimitOfPagesOfContributors } from "./usecases/get-limit-of-pages-of-contributors";
+import { GetLimitOfPagesOfContributorsRoute } from "./infra/express/routes/pages/get-limit-of-pages-of-contributors-express-route";
 
 function main() {
     dotenv.config({path: resolve(__dirname, '../.env')})
@@ -37,7 +41,9 @@ function main() {
     const showAssociateUseCase = new ShowAssociate(associateRepository)
     const showAssociatesPerBirthdayMonthUseCase = new ShowAssociatesPerBirthdayMonth(associateRepository)
     const indexAssociatesUseCase = new IndexAssociates(associateRepository)
+    const indexContributorsUseCase = new IndexContributors(associateRepository)
     const getLimitOfPagesOfAssociatesUseCase = new GetLimitOfPagesOfAssociates(associateRepository)
+    const getLimitOfPagesOfContributorsUseCase = new GetLimitOfPagesOfContributors(associateRepository)
     const showAttendUseCase = new ShowAttend(attendRepository)
     const createAttendUseCase = new CreateAttend(attendRepository)
     const loginUserUseCase = new LoginUser(userRepository)
@@ -49,13 +55,15 @@ function main() {
     const showAssociateRoute = ShowAssociateRoute.show(showAssociateUseCase)
     const showAssociatesPerBirthdayMonthRoute = ShowAssociatesPerBirthdayMonthRoute.show(showAssociatesPerBirthdayMonthUseCase)
     const indexAssociatesRoute = IndexAssociatesRoute.index(indexAssociatesUseCase)
+    const indexContributorsRoute = IndexContributorsRoute.index(indexContributorsUseCase)
     const getLimitOfPagesOfAssociatesRoute = GetLimitOfPagesOfAssociatesRoute.index(getLimitOfPagesOfAssociatesUseCase)
+    const getLimitOfPagesOfContributorsRoute = GetLimitOfPagesOfContributorsRoute.index(getLimitOfPagesOfContributorsUseCase)
     const showAttendRoute = ShowAttendRoute.show(showAttendUseCase)
     const createAttendRoute = CreateAttendRoute.create(createAttendUseCase)
     const loginUserRoute = LoginUserRoute.create(loginUserUseCase)
     const verifyTokenRoute = VerifyTokenRoute.create(verifyTokenUseCase)
 
-    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, loginUserRoute, verifyTokenRoute, getLimitOfPagesOfAssociatesRoute])
+    const api = ApiExpress.create([createAssociateRoute, showAssociatesRoute, showAssociateRoute, showAssociatesPerBirthdayMonthRoute, showAttendRoute, createAttendRoute, indexAssociatesRoute, indexContributorsRoute, loginUserRoute, verifyTokenRoute, getLimitOfPagesOfAssociatesRoute, getLimitOfPagesOfContributorsRoute])
     api.start(Number(process.env.PORT))
 }
 main()

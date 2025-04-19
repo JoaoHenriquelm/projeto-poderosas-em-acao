@@ -199,9 +199,51 @@ export class mongoDBAssociate implements AssociateRepository {
 		});
 		return associateList;
 	}
+
 	async getNumberOfPages(limit: number): Promise<number> {
 		const totalDocuments = await this.associateModel.countDocuments();
 		const totalPages = Math.ceil(totalDocuments / limit);
 		return totalPages;
+	}
+
+	async getNumberOfPagesContributors(limit: number): Promise<number> {
+		const totalDocuments = await this.associateModel.countDocuments({associationCategory: "Sócio Contribuinte"});
+		const totalPages = Math.ceil(totalDocuments / limit);
+		return totalPages;
+	}
+
+	async findContributorsOrderByContribuitionAmountPerLimit(limit: number, page: number): Promise<Array<Associate>> {
+		const skip = (page - 1) * limit;
+		const search = await this.associateModel.find({associationCategory: "Sócio Contribuinte"}).sort({contribuitionAmount: -1}).skip(skip).limit(limit);
+
+		const associateList = search.map((s) => {
+			const associate = Associate.with({
+				_id: s.id,
+				address: s.address,
+				associationCategory: s.associationCategory,
+				cellPhone: s.cellPhone,
+				cep: s.cep,
+				city: s.city,
+				contribuitionAmount: s.contribuitionAmount,
+				cpf: s.cpf,
+				dateOfBirth: s.dateOfBirth,
+				email: s.email,
+				fullName: s.fullName,
+				homePhone: s.homePhone,
+				issuingBody: s.issuingBody,
+				maritalStatus: s.maritalStatus,
+				natiolity: s.natiolity,
+				paymentMethod: s.paymentMethod,
+				responsibleCPF: s.responsibleCPF,
+				responsibleName: s.responsibleName,
+				rg: s.rg,
+				state: s.state,
+				street: s.street,
+				monthBirthday: s.monthBirthday,
+				dayBirthday: s.dayBirthday
+			});
+			return associate;
+		});
+		return associateList;
 	}
 }

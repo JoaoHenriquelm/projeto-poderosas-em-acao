@@ -15,4 +15,9 @@ export interface AssociateRepository {
 	getNumberOfPages(
 		limit: number,
 	): Promise<number>
+	getNumberOfPagesContributors(limit: number): Promise<number>
+	findContributorsOrderByContribuitionAmountPerLimit(
+		limit: number,
+		page: number
+	): Promise<Array<Associate>>
 }

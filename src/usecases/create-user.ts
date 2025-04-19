@@ -1,8 +1,7 @@
-
 import { User } from "../entities/user";
 import { Either, failure, success } from "../errors/either";
 import { UserRepository } from "../repositories/user-repository";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 export interface CreateUserRequest {
 	name: string;
@@ -19,7 +18,7 @@ export class CreateUser implements CreateUserProtocol {
 	constructor(private repository: UserRepository) {}
 
 	async execute(request: CreateUserRequest): Promise<CreateUserResponse> {
-        const hashPassword = await bcrypt.hash(request.password, 8)
+		const hashPassword = await bcrypt.hash(request.password, 8);
 
 		const user = User.createUser(request.name, hashPassword);
 

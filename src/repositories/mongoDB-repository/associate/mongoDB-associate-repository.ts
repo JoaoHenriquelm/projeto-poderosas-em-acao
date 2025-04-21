@@ -214,17 +214,7 @@ export class mongoDBAssociate implements AssociateRepository {
 
 	async findContributorsOrderByContribuitionAmountPerLimit(limit: number, page: number): Promise<Array<Associate>> {
 		const skip = (page - 1) * limit;
-		const search = await this.associateModel.aggregate([
-			{ $match: { associationCategory: "Sócio Contribuinte" } },
-			{
-				$addFields: {
-					contribuitionAmountNumber: { $toDouble: "$contribuitionAmount" }
-				}
-			},
-			{ $sort: { contribuitionAmountNumber: -1 } },
-			{ $skip: skip },
-			{ $limit: limit }
-		]);
+		const search = await this.associateModel.find({ associationCategory: "Sócio Contribuinte" }).skip(skip).limit(limit)
 		const associateList = search.map((s) => {
 			const associate = Associate.with({
 				_id: s.id,
